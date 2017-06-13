@@ -48,11 +48,23 @@ class TextAngularPageConfigurator extends PageConfigurator
         {
             JQueryPageConfigurator.setRequired(page.getBody(), true);
             AngularPageConfigurator.setRequired(page.getBody(), true);
-            BootstrapPageConfigurator.setBootstrapRequired(page.getBody(), true);
+            BootstrapPageConfigurator.setRequired(page.getBody(), true);
 
             page.getBody().addJavaScriptReference(TextAngularReferencePool.TextAngular.getJavaScriptReference());
             page.getBody().addJavaScriptReference(TextAngularReferencePool.TextAngularRangy.getJavaScriptReference());
-            page.getBody().addJavaScriptReference(TextAngularReferencePool.TextAngularSanitize.getJavaScriptReference());
+
+            try
+            {
+                if (Class.forName("za.co.mmagon.jwebswing.plugins.angularsanitize.AngularSanitizeModule") != null)
+                {
+
+                }
+            }
+            catch (ClassNotFoundException ex)
+            {
+                //Only use Angular Sanitize provided if angular sanitizer module not found
+                page.getBody().addJavaScriptReference(TextAngularReferencePool.TextAngularSanitize.getJavaScriptReference());
+            }
 
             page.getBody().addCssReference(TextAngularReferencePool.TextAngular.getCssReference());
             page.getAngular().getAngularModules().add(new TextAngularModule());

@@ -13,11 +13,11 @@ import za.co.mmagon.jwebswing.base.servlets.interfaces.ReferencePool;
  */
 enum TextAngularReferencePool implements ReferencePool
 {
-    TextAngular(new JavascriptReference("TextAngular", 1.5, "bower_components/textAngular/textAngular.min.js", 16),
-            new CSSReference("TextAngular", 1.5, "bower_components/textAngular/textAngular.css")),
-    TextAngularSetup(new JavascriptReference("TextAngularSetup", 1.5, "bower_components/textAngular/textAngularSetup", 15), null),
-    TextAngularSanitize(new JavascriptReference("TextAngularSanitize", 1.5, "bower_components/textAngular/textAngular-sanitize.js", 15), null),
-    TextAngularRangy(new JavascriptReference("TextAngularRangy", 1.5, "bower_components/textAngular/textAngular-rangy.js", 15), null);
+    TextAngular(new JavascriptReference("TextAngular", 1.5, "bower_components/textAngular/dist/textAngular.min.js", 16),
+            new CSSReference("TextAngular", 1.5, "bower_components/textAngular/dist/textAngular.css")),
+    TextAngularSetup(new JavascriptReference("TextAngularSetup", 1.5, "bower_components/textAngular/dist/textAngularSetup", 15), null),
+    TextAngularSanitize(new JavascriptReference("TextAngularSanitize", 1.5, "bower_components/textAngular/dist/textAngular-sanitize.js", 15), null),
+    TextAngularRangy(new JavascriptReference("TextAngularRangy", 1.5, "bower_components/textAngular/dist/textAngular-rangy.min.js", 15), null);
     /**
      * Any sub data
      */

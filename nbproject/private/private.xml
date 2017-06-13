@@ -2,13 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group name="LSM">
-            <file>file:/C:/AESoft/Programs/JWebSwingPlugins/TextAngular/src/za/co/mmagon/jwebswing/plugins/textangular/TextAngularPageConfigurator.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwingPlugins/TextAngular/src/za/co/mmagon/jwebswing/plugins/textangular/TextAngularReferencePool.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwingPlugins/TextAngular/src/za/co/mmagon/jwebswing/plugins/textangular/TextAngularModule.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwingPlugins/TextAngular/src/za/co/mmagon/jwebswing/plugins/textangular/TextAngular.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwingPlugins/TextAngular/src/za/co/mmagon/jwebswing/plugins/textangular/TextAngularAttributes.java</file>
-            <file>file:/C:/AESoft/Programs/JWebSwingPlugins/TextAngular/test/za/co/mmagon/jwebswing/plugins/textangular/TextAngularPageConfiguratorTest.java</file>
-        </group>
+        <group name="LSM"/>
     </open-files>
 </project-private>
