@@ -52,19 +52,7 @@ class TextAngularPageConfigurator extends PageConfigurator
 
             page.getBody().addJavaScriptReference(TextAngularReferencePool.TextAngular.getJavaScriptReference());
             page.getBody().addJavaScriptReference(TextAngularReferencePool.TextAngularRangy.getJavaScriptReference());
-
-            try
-            {
-                if (Class.forName("za.co.mmagon.jwebswing.plugins.angularsanitize.AngularSanitizeModule") != null)
-                {
-
-                }
-            }
-            catch (ClassNotFoundException ex)
-            {
-                //Only use Angular Sanitize provided if angular sanitizer module not found
-                page.getBody().addJavaScriptReference(TextAngularReferencePool.TextAngularSanitize.getJavaScriptReference());
-            }
+            page.getBody().addJavaScriptReference(TextAngularReferencePool.TextAngularSanitize.getJavaScriptReference());
 
             page.getBody().addCssReference(TextAngularReferencePool.TextAngular.getCssReference());
             page.getAngular().getAngularModules().add(new TextAngularModule());
