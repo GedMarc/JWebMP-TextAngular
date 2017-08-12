@@ -11,19 +11,19 @@ import za.co.mmagon.jwebswing.base.angular.modules.AngularModuleBase;
 class TextAngularModule extends AngularModuleBase
 {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    /*
-     * Constructs a new TextAngularModule
-     */
-    public TextAngularModule()
-    {
-        super("textAngular");
-    }
+	/*
+	 * Constructs a new TextAngularModule
+	 */
+	public TextAngularModule()
+	{
+		super("textAngular");
+	}
 
-    @Override
-    public String renderFunction()
-    {
-        return null;
-    }
+	@Override
+	public String renderFunction()
+	{
+		return null;
+	}
 }

@@ -1,40 +1,40 @@
 angular.module('textAngular.factories', [])
-.factory('taBrowserTag', [function(){
-    return function(tag){
-        /* istanbul ignore next: ie specific test */
-        if(!tag) return (_browserDetect.ie <= 8)? 'P' : 'p';
-        else if(tag === '') return (_browserDetect.ie === undefined)? 'div' : (_browserDetect.ie <= 8)? 'P' : 'p';
-        else return (_browserDetect.ie <= 8)? tag.toUpperCase() : tag;
-    };
-}]).factory('taApplyCustomRenderers', ['taCustomRenderers', 'taDOM', function(taCustomRenderers, taDOM){
-    return function(val){
+    .factory('taBrowserTag', [function () {
+        return function (tag) {
+            /* istanbul ignore next: ie specific test */
+            if (!tag) return (_browserDetect.ie <= 8) ? 'P' : 'p';
+            else if (tag === '') return (_browserDetect.ie === undefined) ? 'div' : (_browserDetect.ie <= 8) ? 'P' : 'p';
+            else return (_browserDetect.ie <= 8) ? tag.toUpperCase() : tag;
+        };
+    }]).factory('taApplyCustomRenderers', ['taCustomRenderers', 'taDOM', function (taCustomRenderers, taDOM) {
+    return function (val) {
         var element = angular.element('<div></div>');
         element[0].innerHTML = val;
 
-        angular.forEach(taCustomRenderers, function(renderer){
+        angular.forEach(taCustomRenderers, function (renderer) {
             var elements = [];
             // get elements based on what is defined. If both defined do secondary filter in the forEach after using selector string
-            if(renderer.selector && renderer.selector !== '')
+            if (renderer.selector && renderer.selector !== '')
                 elements = element.find(renderer.selector);
             /* istanbul ignore else: shouldn't fire, if it does we're ignoring everything */
-            else if(renderer.customAttribute && renderer.customAttribute !== '')
+            else if (renderer.customAttribute && renderer.customAttribute !== '')
                 elements = taDOM.getByAttribute(element, renderer.customAttribute);
             // process elements if any found
-            angular.forEach(elements, function(_element){
+            angular.forEach(elements, function (_element) {
                 _element = angular.element(_element);
-                if(renderer.selector && renderer.selector !== '' && renderer.customAttribute && renderer.customAttribute !== ''){
-                    if(_element.attr(renderer.customAttribute) !== undefined) renderer.renderLogic(_element);
+                if (renderer.selector && renderer.selector !== '' && renderer.customAttribute && renderer.customAttribute !== '') {
+                    if (_element.attr(renderer.customAttribute) !== undefined) renderer.renderLogic(_element);
                 } else renderer.renderLogic(_element);
             });
         });
 
         return element[0].innerHTML;
     };
-}]).factory('taFixChrome', function(){
+}]).factory('taFixChrome', function () {
     // get whaterever rubbish is inserted in chrome
     // should be passed an html string, returns an html string
-    var taFixChrome = function(html, keepStyles){
-        if(!html || !angular.isString(html) || html.length <= 0) return html;
+    var taFixChrome = function (html, keepStyles) {
+        if (!html || !angular.isString(html) || html.length <= 0) return html;
         // grab all elements with a style attibute
         // a betterSpanMatch matches only a style=... with matching quotes
         // this captures the whole:
@@ -48,7 +48,7 @@ angular.module('textAngular.factories', [])
         // remove all the Apple-converted-space spans and replace with the content of the span
         //console.log('before:', html);
         /* istanbul ignore next: apple-contereted-space span match */
-        while(match = appleConvertedSpaceMatch.exec(html)){
+        while (match = appleConvertedSpaceMatch.exec(html)) {
             appleSpaceVal = match[1];
             appleSpaceVal = appleSpaceVal.replace(/&nbsp;/ig, ' ');
             finalHtml += html.substring(lastIndex, match.index) + appleSpaceVal;
@@ -58,9 +58,9 @@ angular.module('textAngular.factories', [])
         if (lastIndex) {
             // modified....
             finalHtml += html.substring(lastIndex);
-            html=finalHtml;
-            finalHtml='';
-            lastIndex=0;
+            html = finalHtml;
+            finalHtml = '';
+            lastIndex = 0;
         }
         /////////////////////////////////////////////////////////////
         //
@@ -77,7 +77,7 @@ angular.module('textAngular.factories', [])
         /////////////////////////////////////////////////////////////
         if (!keepStyles) {
             while (match = betterSpanMatch.exec(html)) {
-                finalHtml += html.substring(lastIndex, match.index-1);
+                finalHtml += html.substring(lastIndex, match.index - 1);
                 styleVal = match[0];
                 // test for chrome inserted junk
                 match = /font-family: inherit;|line-height: 1.[0-9]{3,12};|color: inherit; line-height: 1.1;|color: rgb\(\d{1,3}, \d{1,3}, \d{1,3}\);|background-color: rgb\(\d{1,3}, \d{1,3}, \d{1,3}\);/gi.exec(styleVal);
@@ -96,34 +96,34 @@ angular.module('textAngular.factories', [])
         }
         //console.log('final:', finalHtml);
         // only replace when something has changed, else we get focus problems on inserting lists
-        if(lastIndex > 0){
+        if (lastIndex > 0) {
             // replace all empty strings
             var fe = finalHtml.replace(/<span\s?>(.*?)<\/span>(<br(\/|)>|)/ig, '$1');
             return fe;
         } else return html;
     };
     return taFixChrome;
-}).factory('taSanitize', ['$sanitize', function taSanitizeFactory($sanitize){
+}).factory('taSanitize', ['$sanitize', function taSanitizeFactory($sanitize) {
 
     var convert_infos = [
         {
             property: 'font-weight',
-            values: [ 'bold' ],
+            values: ['bold'],
             tag: 'b'
         },
         {
             property: 'font-style',
-            values: [ 'italic' ],
+            values: ['italic'],
             tag: 'i'
         }
     ];
 
     var styleMatch = [];
-    for(var i = 0; i < convert_infos.length; i++){
+    for (var i = 0; i < convert_infos.length; i++) {
         var _partialStyle = '(' + convert_infos[i].property + ':\\s*(';
-        for(var j = 0; j < convert_infos[i].values.length; j++){
+        for (var j = 0; j < convert_infos[i].values.length; j++) {
             /* istanbul ignore next: not needed to be tested yet */
-            if(j > 0) _partialStyle += '|';
+            if (j > 0) _partialStyle += '|';
             _partialStyle += convert_infos[i].values[j];
         }
         _partialStyle += ');)';
@@ -136,12 +136,12 @@ angular.module('textAngular.factories', [])
         var lastIndex = 0;
         var match;
         var tagRegex = /<[^>]*>/ig;
-        while(match = tagRegex.exec(html)){
+        while (match = tagRegex.exec(html)) {
             lastIndex = match.index;
-            if(match[0].substr(1, 1) === '/'){
-                if(depth === 0) break;
+            if (match[0].substr(1, 1) === '/') {
+                if (depth === 0) break;
                 else depth--;
-            }else depth++;
+            } else depth++;
         }
         return wrapTag +
             html.substring(0, lastIndex) +
@@ -150,26 +150,26 @@ angular.module('textAngular.factories', [])
             html.substring(lastIndex);
     }
 
-    function transformLegacyStyles(html){
-        if(!html || !angular.isString(html) || html.length <= 0) return html;
+    function transformLegacyStyles(html) {
+        if (!html || !angular.isString(html) || html.length <= 0) return html;
         var i;
         var styleElementMatch = /<([^>\/]+?)style=("([^"]+)"|'([^']+)')([^>]*)>/ig;
         var match, subMatch, styleVal, newTag, lastNewTag = '', newHtml, finalHtml = '', lastIndex = 0;
-        while(match = styleElementMatch.exec(html)){
+        while (match = styleElementMatch.exec(html)) {
             // one of the quoted values ' or "
             /* istanbul ignore next: quotations match */
             styleVal = match[3] || match[4];
             var styleRegex = new RegExp(styleRegexString, 'i');
             // test for style values to change
-            if(angular.isString(styleVal) && styleRegex.test(styleVal)){
+            if (angular.isString(styleVal) && styleRegex.test(styleVal)) {
                 // remove build tag list
                 newTag = '';
                 // init regex here for exec
                 var styleRegexExec = new RegExp(styleRegexString, 'ig');
                 // find relevand tags and build a string of them
-                while(subMatch = styleRegexExec.exec(styleVal)){
-                    for(i = 0; i < convert_infos.length; i++){
-                        if(!!subMatch[(i*2) + 2]){
+                while (subMatch = styleRegexExec.exec(styleVal)) {
+                    for (i = 0; i < convert_infos.length; i++) {
+                        if (!!subMatch[(i * 2) + 2]) {
                             newTag += '<' + convert_infos[i].tag + '>';
                         }
                     }
@@ -177,34 +177,34 @@ angular.module('textAngular.factories', [])
                 // recursively find more legacy styles in html before this tag and after the previous match (if any)
                 newHtml = transformLegacyStyles(html.substring(lastIndex, match.index));
                 // build up html
-                if(lastNewTag.length > 0){
+                if (lastNewTag.length > 0) {
                     finalHtml += wrapNested(newHtml, lastNewTag);
-                }else finalHtml += newHtml;
+                } else finalHtml += newHtml;
                 // grab the style val without the transformed values
                 styleVal = styleVal.replace(new RegExp(styleRegexString, 'ig'), '');
                 // build the html tag
                 finalHtml += '<' + match[1].trim();
-                if(styleVal.length > 0) finalHtml += ' style="' + styleVal + '"';
+                if (styleVal.length > 0) finalHtml += ' style="' + styleVal + '"';
                 finalHtml += match[5] + '>';
                 // update the start index to after this tag
                 lastIndex = match.index + match[0].length;
                 lastNewTag = newTag;
             }
         }
-        if(lastNewTag.length > 0){
+        if (lastNewTag.length > 0) {
             finalHtml += wrapNested(html.substring(lastIndex), lastNewTag);
         }
         else finalHtml += html.substring(lastIndex);
         return finalHtml;
     }
 
-    function transformLegacyAttributes(html){
-        if(!html || !angular.isString(html) || html.length <= 0) return html;
+    function transformLegacyAttributes(html) {
+        if (!html || !angular.isString(html) || html.length <= 0) return html;
         // replace all align='...' tags with text-align attributes
         var attrElementMatch = /<([^>\/]+?)align=("([^"]+)"|'([^']+)')([^>]*)>/ig;
         var match, finalHtml = '', lastIndex = 0;
         // match all attr tags
-        while(match = attrElementMatch.exec(html)){
+        while (match = attrElementMatch.exec(html)) {
             // add all html before this tag
             finalHtml += html.substring(lastIndex, match.index);
             // record last index after this tag
@@ -212,10 +212,10 @@ angular.module('textAngular.factories', [])
             // construct tag without the align attribute
             var newTag = '<' + match[1] + match[5];
             // add the style attribute
-            if(/style=("([^"]+)"|'([^']+)')/ig.test(newTag)){
+            if (/style=("([^"]+)"|'([^']+)')/ig.test(newTag)) {
                 /* istanbul ignore next: quotations match */
                 newTag = newTag.replace(/style=("([^"]+)"|'([^']+)')/i, 'style="$2$3 text-align:' + (match[3] || match[4]) + ';"');
-            }else{
+            } else {
                 /* istanbul ignore next: quotations match */
                 newTag += ' style="text-align:' + (match[3] || match[4]) + ';"';
             }
@@ -232,9 +232,9 @@ angular.module('textAngular.factories', [])
     var rsb2 = new RegExp(/<span class="rangySelectionBoundary" id="selectionBoundary_\d+_\d+">[^<>]+?<\/span>/ig);
     var rsb3 = new RegExp(/<span id="selectionBoundary_\d+_\d+" class="rangySelectionBoundary">[^<>]+?<\/span>/ig);
 
-    return function taSanitize(unsafe, oldsafe, ignore){
+    return function taSanitize(unsafe, oldsafe, ignore) {
         // unsafe html should NEVER built into a DOM object via angular.element. This allows XSS to be inserted and run.
-        if ( !ignore ) {
+        if (!ignore) {
             try {
                 unsafe = transformLegacyStyles(unsafe);
             } catch (e) {
@@ -263,8 +263,8 @@ angular.module('textAngular.factories', [])
         try {
             safe = $sanitize(unsafe);
             // do this afterwards, then the $sanitizer should still throw for bad markup
-            if(ignore) safe = unsafe;
-        } catch (e){
+            if (ignore) safe = unsafe;
+        } catch (e) {
             safe = oldsafe || '';
         }
 
@@ -277,32 +277,34 @@ angular.module('textAngular.factories', [])
         var lastIndex = 0;
         var origTag;
         safe = '';
-        while((origTag = re.exec(processedSafe)) !== null && index < _preTags.length){
+        while ((origTag = re.exec(processedSafe)) !== null && index < _preTags.length) {
             safe += processedSafe.substring(lastIndex, origTag.index) + _preTags[index];
             lastIndex = origTag.index + origTag[0].length;
             index++;
         }
         return safe + processedSafe.substring(lastIndex);
     };
-}]).factory('taToolExecuteAction', ['$q', '$log', function($q, $log){
+}]).factory('taToolExecuteAction', ['$q', '$log', function ($q, $log) {
     // this must be called on a toolScope or instance
-    return function(editor){
-        if(editor !== undefined) this.$editor = function(){ return editor; };
+    return function (editor) {
+        if (editor !== undefined) this.$editor = function () {
+            return editor;
+        };
         var deferred = $q.defer(),
             promise = deferred.promise,
             _editor = this.$editor();
         // pass into the action the deferred function and also the function to reload the current selection if rangy available
         var result;
-        try{
+        try {
             result = this.action(deferred, _editor.startAction());
             // We set the .finally callback here to make sure it doesn't get executed before any other .then callback.
-            promise['finally'](function(){
+            promise['finally'](function () {
                 _editor.endAction.call(_editor);
             });
-        }catch(exc){
+        } catch (exc) {
             $log.error(exc);
         }
-        if(result || result === undefined){
+        if (result || result === undefined) {
             // if true or undefined is returned then the action has finished. Otherwise the deferred action will be resolved manually.
             deferred.resolve();
         }

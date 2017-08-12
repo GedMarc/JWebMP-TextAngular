@@ -13,19 +13,19 @@
  * Version: 1.3.0
  * Build date: 10 May 2015
  */
-(function(factory, root) {
+(function (factory, root) {
     if (typeof define == "function" && define.amd) {
         // AMD. Register as an anonymous module with a dependency on Rangy.
         define(["./rangy-core"], factory);
     } else if (typeof module != "undefined" && typeof exports == "object") {
         // Node/CommonJS style
-        module.exports = factory( require("rangy") );
+        module.exports = factory(require("rangy"));
     } else {
         // No AMD or CommonJS support so we use the rangy property of root (probably the global variable)
         factory(root.rangy);
     }
-})(function(rangy) {
-    rangy.createModule("Serializer", ["WrappedSelection"], function(api, module) {
+})(function (rangy) {
+    rangy.createModule("Serializer", ["WrappedSelection"], function (api, module) {
         var UNDEF = "undefined";
         var util = api.util;
 
@@ -35,7 +35,7 @@
         }
 
         // Checksum for checking whether range can be serialized
-        var crc32 = (function() {
+        var crc32 = (function () {
             function utf8encode(str) {
                 var utf8CharCodes = [];
 
@@ -78,7 +78,7 @@
                 return cachedCrcTable;
             }
 
-            return function(str) {
+            return function (str) {
                 var utf8CharCodes = utf8encode(str), crc = -1, crcTable = getCrcTable();
                 for (var i = 0, len = utf8CharCodes.length, y; i < len; ++i) {
                     y = (crc ^ utf8CharCodes[i]) & 0xFF;
@@ -156,7 +156,7 @@
                     node = node.childNodes[nodeIndex];
                 } else {
                     throw module.createError("deserializePosition() failed: node " + dom.inspectNode(node) +
-                            " has no child with index " + nodeIndex + ", " + i);
+                        " has no child with index " + nodeIndex + ", " + i);
                 }
             }
 
@@ -195,7 +195,8 @@
                         ") and target root node (" + rootNodeChecksum + ") do not match");
                 }
             }
-            var start = deserializePosition(result[1], rootNode, doc), end = deserializePosition(result[2], rootNode, doc);
+            var start = deserializePosition(result[1], rootNode, doc),
+                end = deserializePosition(result[2], rootNode, doc);
             var range = api.createRange(doc);
             range.setStartAndEnd(start.node, start.offset, end.node, end.offset);
             return range;
@@ -309,6 +310,6 @@
 
         util.crc32 = crc32;
     });
-    
+
     return rangy;
 }, this);
