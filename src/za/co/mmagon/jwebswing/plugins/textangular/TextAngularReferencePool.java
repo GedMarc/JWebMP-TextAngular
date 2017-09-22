@@ -28,19 +28,20 @@ enum TextAngularReferencePool implements ReferencePool
 	/**
 	 * A new AngularSlimScrollReferencePool
 	 */
-	private TextAngularReferencePool()
+	TextAngularReferencePool()
 	{
 
 	}
+
 	/**
 	 * A new AngularSlimScrollReferencePool with data
 	 */
-	private TextAngularReferencePool(String data)
+	TextAngularReferencePool(String data)
 	{
 
 	}
-
-	private TextAngularReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
+	
+	TextAngularReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
 	{
 		this.javaScriptReference = javaScriptReference;
 		if (this.javaScriptReference != null)

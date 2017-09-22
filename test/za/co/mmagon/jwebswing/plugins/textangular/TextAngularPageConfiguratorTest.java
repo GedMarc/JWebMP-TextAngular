@@ -9,16 +9,16 @@ import za.co.mmagon.jwebswing.Page;
  */
 public class TextAngularPageConfiguratorTest extends BaseTestClass
 {
-
+	
 	public TextAngularPageConfiguratorTest()
 	{
 	}
-
+	
 	@Test
 	public void testSomeMethod()
 	{
 		Page p = getInstance();
 		System.out.println(p.toString(0));
 	}
-
+	
 }
