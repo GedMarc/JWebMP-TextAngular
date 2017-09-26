@@ -560,7 +560,7 @@ angular.module('textAngular.DOM', ['textAngular.factories'])
                 list.after($target);
                 list.remove();
                 taSelection.setSelectionToElementEnd($target[0]);
-                return;
+
             } else if (!nextElement) {
                 // this is the last in the list, so we just remove it..
                 listElement.remove();
@@ -636,12 +636,12 @@ angular.module('textAngular.DOM', ['textAngular.factories'])
                 list.after($target);
                 list.remove();
                 taSelection.setSelectionToElementEnd($target[0]);
-                return;
+
             } else if (!afterElement) {
                 // this is the last in the list, so we just remove it..
                 list.after($target);
                 taSelection.setSelectionToElementEnd($target[0]);
-                return;
+
             } else {
                 // okay it was some where in the middle... so we need to break apart the list...
                 var html1 = '';
@@ -1232,7 +1232,7 @@ angular.module('textAngular.DOM', ['textAngular.factories'])
                         }
                     }
                 }
-                return;
+
             },
             // if we use the RIGHT_ARROW and we are at the special place <span>&#65279;</span> we move the cursor over by one...
             updateRightArrowKey: function (element) {
@@ -1290,7 +1290,7 @@ angular.module('textAngular.DOM', ['textAngular.factories'])
                                     if (m && true || range.startOffset === m[1].length + 1) {
                                         //console.log('RIGHT &&&&&&&&&&&&&&&&&&&...found it...&&&&&&&&&&&', range.startOffset, m[1].length);
                                         // no need to make any adjustment
-                                        return;
+
                                     }
                                 }
                             }
@@ -2919,7 +2919,7 @@ textAngular.directive("textAngular", [
                 angular.extend(scope, angular.copy(taOptions), {
                     // wraps the selection in the provided tag / execCommand function. Should only be called in WYSIWYG mode.
                     wrapSelection: function (command, opt, isSelectableElementTool) {
-                        // we restore the saved selection that was saved when focus was lost
+                        // we restore the 
                         /* NOT FUNCTIONAL YET */
                         /* textAngularManager.restoreFocusSelection(scope._name, scope); */
                         if (command.toLowerCase() === "undo") {
@@ -4101,7 +4101,7 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
              saveFocusSelection: function (name, range) {
             editors[name].savedFocusRange = range;
         },
-             // restore the saved selection from when the focus was lost
+             // restore the 
              restoreFocusSelection: function(name, scope) {
             // we only do this if NOT focussed and saved...
             if (editors[name].savedFocusRange && !scope.focussed) {

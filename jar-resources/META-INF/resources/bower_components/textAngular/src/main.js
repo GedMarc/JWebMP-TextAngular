@@ -39,7 +39,7 @@ textAngular.directive("textAngular", [
                 angular.extend(scope, angular.copy(taOptions), {
                     // wraps the selection in the provided tag / execCommand function. Should only be called in WYSIWYG mode.
                     wrapSelection: function (command, opt, isSelectableElementTool) {
-                        // we restore the saved selection that was saved when focus was lost
+                        // we restore the 
                         /* NOT FUNCTIONAL YET */
                         /* textAngularManager.restoreFocusSelection(scope._name, scope); */
                         if (command.toLowerCase() === "undo") {
@@ -1221,7 +1221,7 @@ textAngular.service('textAngularManager', ['taToolExecuteAction', 'taTools', 'ta
              saveFocusSelection: function (name, range) {
             editors[name].savedFocusRange = range;
         },
-             // restore the saved selection from when the focus was lost
+             // restore the 
              restoreFocusSelection: function(name, scope) {
             // we only do this if NOT focussed and saved...
             if (editors[name].savedFocusRange && !scope.focussed) {
