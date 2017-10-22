@@ -63,4 +63,32 @@ public class TextAngular extends Div
 		return this;
 	}
 
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o)
+		{
+			return true;
+		}
+		if (!(o instanceof TextAngular))
+		{
+			return false;
+		}
+		if (!super.equals(o))
+		{
+			return false;
+		}
+
+		TextAngular that = (TextAngular) o;
+
+		return getVariableName() != null ? getVariableName().equals(that.getVariableName()) : that.getVariableName() == null;
+	}
+
+	@Override
+	public int hashCode()
+	{
+		int result = super.hashCode();
+		result = 31 * result + (getVariableName() != null ? getVariableName().hashCode() : 0);
+		return result;
+	}
 }

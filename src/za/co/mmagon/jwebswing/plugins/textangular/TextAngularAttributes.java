@@ -16,18 +16,11 @@ public enum TextAngularAttributes
 	/**
 	 * A new TextAngularAttributes
 	 */
-	private TextAngularAttributes()
+	TextAngularAttributes()
 	{
 
 	}
 
-	/**
-	 * A new TextAngularAttributes with data
-	 */
-	private TextAngularAttributes(String data)
-	{
-
-	}
 
 	/**
 	 * Returns the name or the data contained within
