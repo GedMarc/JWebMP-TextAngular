@@ -87,8 +87,6 @@ public class TextAngular extends Div
 	@Override
 	public int hashCode()
 	{
-		int result = super.hashCode();
-		result = 31 * result + (getVariableName() != null ? getVariableName().hashCode() : 0);
-		return result;
+		return super.hashCode();
 	}
 }
