@@ -4,7 +4,6 @@ import za.co.mmagon.jwebswing.Page;
 import za.co.mmagon.jwebswing.PageConfigurator;
 import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 import za.co.mmagon.jwebswing.plugins.PluginInformation;
-import za.co.mmagon.jwebswing.plugins.bootstrap.BootstrapPageConfigurator;
 import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 
 /**
@@ -46,7 +45,6 @@ import za.co.mmagon.jwebswing.plugins.jquery.JQueryPageConfigurator;
 		{
 			JQueryPageConfigurator.setRequired(true);
 			AngularPageConfigurator.setRequired(true);
-			BootstrapPageConfigurator.setRequired(page.getBody(), true);
 
 			page.getBody().addJavaScriptReference(TextAngularReferencePool.TextAngular.getJavaScriptReference());
 			page.getBody().addJavaScriptReference(TextAngularReferencePool.TextAngularRangy.getJavaScriptReference());
