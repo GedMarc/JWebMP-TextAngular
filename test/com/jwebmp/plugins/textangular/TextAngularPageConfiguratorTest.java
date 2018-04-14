@@ -1,14 +1,15 @@
-package za.co.mmagon.jwebswing.plugins.textangular;
+package com.jwebmp.plugins.textangular;
 
+import com.jwebmp.BaseTestClass;
+import com.jwebmp.Page;
+import com.jwebmp.base.angular.AngularPageConfigurator;
 import org.junit.jupiter.api.Test;
-import za.co.mmagon.jwebswing.BaseTestClass;
-import za.co.mmagon.jwebswing.Page;
-import za.co.mmagon.jwebswing.base.angular.AngularPageConfigurator;
 
 /**
  * @author Marc Magon
  */
-public class TextAngularPageConfiguratorTest extends BaseTestClass
+public class TextAngularPageConfiguratorTest
+		extends BaseTestClass
 {
 
 	public TextAngularPageConfiguratorTest()

@@ -1,7 +1,7 @@
-package za.co.mmagon.jwebswing.plugins.textangular;
+package com.jwebmp.plugins.textangular;
 
-import za.co.mmagon.jwebswing.base.html.Div;
-import za.co.mmagon.jwebswing.plugins.ComponentInformation;
+import com.jwebmp.base.html.Div;
+import com.jwebmp.plugins.ComponentInformation;
 
 /**
  * Angular UI Sortable Helper
@@ -9,9 +9,11 @@ import za.co.mmagon.jwebswing.plugins.ComponentInformation;
  * @author Marc Magon
  * @since 09 Jun 2017
  */
-@ComponentInformation(name = "Text Angular", description = "A radically powerful Text-Editor/Wysiwyg editor for Angular.js! Create multiple editor instances, two-way-bind HTML content, watch editors for changes and more!",
+@ComponentInformation(name = "Text Angular",
+		description = "A radically powerful Text-Editor/Wysiwyg editor for Angular.js! Create multiple editor instances, two-way-bind HTML content, watch editors for changes and more!",
 		url = "https://github.com/textAngular/textAngular")
-public class TextAngular extends Div
+public class TextAngular
+		extends Div
 {
 
 	private static final long serialVersionUID = 1L;
@@ -40,27 +42,10 @@ public class TextAngular extends Div
 		bind(variableName);
 	}
 
-	/**
-	 * The Angular Variable Name for this component
-	 *
-	 * @return
-	 */
-	public String getVariableName()
+	@Override
+	public int hashCode()
 	{
-		return variableName;
-	}
-
-	/**
-	 * The Angular Variable Name for this component
-	 *
-	 * @param variableName
-	 *
-	 * @return
-	 */
-	public TextAngular setVariableName(String variableName)
-	{
-		this.variableName = variableName;
-		return this;
+		return super.hashCode();
 	}
 
 	@Override
@@ -84,9 +69,26 @@ public class TextAngular extends Div
 		return getVariableName() != null ? getVariableName().equals(that.getVariableName()) : that.getVariableName() == null;
 	}
 
-	@Override
-	public int hashCode()
+	/**
+	 * The Angular Variable Name for this component
+	 *
+	 * @return
+	 */
+	public String getVariableName()
 	{
-		return super.hashCode();
+		return variableName;
+	}
+
+	/**
+	 * The Angular Variable Name for this component
+	 *
+	 * @param variableName
+	 *
+	 * @return
+	 */
+	public TextAngular setVariableName(String variableName)
+	{
+		this.variableName = variableName;
+		return this;
 	}
 }
