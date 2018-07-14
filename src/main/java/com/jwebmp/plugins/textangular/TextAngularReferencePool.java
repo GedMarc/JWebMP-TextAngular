@@ -28,7 +28,8 @@ import com.jwebmp.base.servlets.interfaces.ReferencePool;
  * @author Marc Magon
  * @since 09 Jun 2017
  */
-enum TextAngularReferencePool implements ReferencePool
+enum TextAngularReferencePool
+		implements ReferencePool
 {
 	TextAngular(new JavascriptReference("TextAngular", 1.5, "bower_components/textAngular/dist/textAngular.min.js", 16),
 	            new CSSReference("TextAngular", 1.5, "bower_components/textAngular/dist/textAngular.css")),
@@ -49,7 +50,6 @@ enum TextAngularReferencePool implements ReferencePool
 	{
 
 	}
-
 
 	TextAngularReferencePool(JavascriptReference javaScriptReference, CSSReference cssReference)
 	{

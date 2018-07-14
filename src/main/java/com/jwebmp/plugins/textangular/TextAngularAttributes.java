@@ -38,7 +38,6 @@ public enum TextAngularAttributes
 
 	}
 
-
 	/**
 	 * Returns the name or the data contained within
 	 *
