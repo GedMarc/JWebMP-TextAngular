@@ -1,7 +1,7 @@
 package com.jwebmp.plugins.textangular;
 
-import com.jwebmp.base.html.Div;
-import com.jwebmp.plugins.ComponentInformation;
+import com.jwebmp.core.base.html.Div;
+import com.jwebmp.core.plugins.ComponentInformation;
 
 /**
  * Angular UI Sortable Helper
