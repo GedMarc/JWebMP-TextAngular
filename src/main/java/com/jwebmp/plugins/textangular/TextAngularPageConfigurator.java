@@ -18,10 +18,10 @@
 package com.jwebmp.plugins.textangular;
 
 import com.jwebmp.core.Page;
-import com.jwebmp.core.PageConfigurator;
 import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.plugins.PluginInformation;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
+import com.jwebmp.core.services.IPageConfigurator;
 
 /**
  * The Angular UI Sortable Configurator
@@ -41,11 +41,10 @@ import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 		pluginIconUrl = "",
 		pluginIconImageUrl = "",
 		pluginOriginalHomepage = "http://textangular.com/",
-		pluginDownloadUrl = "https://sourceforge.net/projects/jwebswing/files/plugins/TextAngular.jar/download") class TextAngularPageConfigurator
-		extends PageConfigurator
+		pluginDownloadUrl = "https://sourceforge.net/projects/jwebswing/files/plugins/TextAngular.jar/download")
+public class TextAngularPageConfigurator
+		implements IPageConfigurator
 {
-
-	private static final long serialVersionUID = 1L;
 
 	/*
 	 * Constructs a new TextAngularPageConfigurator
@@ -72,9 +71,6 @@ import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 
 			page.getBody()
 			    .addCssReference(TextAngularReferencePool.TextAngular.getCssReference());
-			page.getAngular()
-			    .getAngularModules()
-			    .add(new TextAngularModule());
 		}
 		return page;
 	}

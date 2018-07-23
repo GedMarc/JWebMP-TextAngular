@@ -1,3 +1,8 @@
+import com.jwebmp.core.base.angular.services.IAngularModule;
+import com.jwebmp.core.services.IPageConfigurator;
+import com.jwebmp.plugins.textangular.TextAngularModule;
+import com.jwebmp.plugins.textangular.TextAngularPageConfigurator;
+
 module com.jwebmp.plugins.textangular {
 
 	exports com.jwebmp.plugins.textangular;
@@ -8,4 +13,8 @@ module com.jwebmp.plugins.textangular {
 
 	requires java.validation;
 	requires java.logging;
+
+	provides IPageConfigurator with TextAngularPageConfigurator;
+	provides IAngularModule with TextAngularModule;
+
 }
