@@ -16,5 +16,5 @@ module com.jwebmp.plugins.textangular {
 
 	provides IPageConfigurator with TextAngularPageConfigurator;
 	provides IAngularModule with TextAngularModule;
-
+	opens com.jwebmp.plugins.textangular to com.fasterxml.jackson.databind,com.jwebmp.core;
 }
