@@ -47,6 +47,10 @@ import javax.validation.constraints.NotNull;
 public class TextAngularPageConfigurator
 		implements IPageConfigurator
 {
+	/**
+	 * If this configurator is enabled
+	 */
+	private static boolean enabled = true;
 
 	/*
 	 * Constructs a new TextAngularPageConfigurator
@@ -54,6 +58,31 @@ public class TextAngularPageConfigurator
 	public TextAngularPageConfigurator()
 	{
 		//Nothing needed
+	}
+
+	/**
+	 * Method isEnabled returns the enabled of this AngularAnimatedChangePageConfigurator object.
+	 * <p>
+	 * If this configurator is enabled
+	 *
+	 * @return the enabled (type boolean) of this AngularAnimatedChangePageConfigurator object.
+	 */
+	public static boolean isEnabled()
+	{
+		return TextAngularPageConfigurator.enabled;
+	}
+
+	/**
+	 * Method setEnabled sets the enabled of this AngularAnimatedChangePageConfigurator object.
+	 * <p>
+	 * If this configurator is enabled
+	 *
+	 * @param mustEnable
+	 * 		the enabled of this AngularAnimatedChangePageConfigurator object.
+	 */
+	public static void setEnabled(boolean mustEnable)
+	{
+		TextAngularPageConfigurator.enabled = mustEnable;
 	}
 
 	@NotNull
@@ -76,5 +105,11 @@ public class TextAngularPageConfigurator
 			    .addCssReference(TextAngularReferencePool.TextAngular.getCssReference());
 		}
 		return page;
+	}
+
+	@Override
+	public boolean enabled()
+	{
+		return TextAngularPageConfigurator.enabled;
 	}
 }
