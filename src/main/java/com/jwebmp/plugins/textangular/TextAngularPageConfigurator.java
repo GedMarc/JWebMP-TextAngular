@@ -38,14 +38,14 @@ import javax.validation.constraints.NotNull;
 		pluginCategories = "text,html entry, edit box,bootstrap, ui,web ui, framework",
 		pluginSubtitle = "textAngular is a super cool WYSIWYG Text Editor directive for AngularJS",
 		pluginSourceUrl = "https://github.com/textAngular/textAngular",
-		pluginWikiUrl = "https://github.com/GedMarc/JWebSwing-TextAngular/wiki",
-		pluginGitUrl = "https://github.com/GedMarc/JWebSwing-TextAngular",
+		pluginWikiUrl = "https://github.com/GedMarc/JWebMP-TextAngular/wiki",
+		pluginGitUrl = "https://github.com/GedMarc/JWebMP-TextAngular",
 		pluginIconUrl = "",
 		pluginIconImageUrl = "",
 		pluginOriginalHomepage = "http://textangular.com/",
 		pluginDownloadUrl = "https://sourceforge.net/projects/jwebswing/files/plugins/TextAngular.jar/download")
 public class TextAngularPageConfigurator
-		implements IPageConfigurator
+		implements IPageConfigurator<TextAngularPageConfigurator>
 {
 	/**
 	 * If this configurator is enabled
