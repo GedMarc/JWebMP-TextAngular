@@ -16,7 +16,6 @@ public class TextAngular
 		extends Div
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * The Angular Variable Name for this component
@@ -43,6 +42,12 @@ public class TextAngular
 	}
 
 	@Override
+	public int hashCode()
+	{
+		return super.hashCode();
+	}
+
+	@Override
 	public boolean equals(Object o)
 	{
 		if (this == o)
@@ -61,12 +66,6 @@ public class TextAngular
 		TextAngular that = (TextAngular) o;
 
 		return getVariableName() != null ? getVariableName().equals(that.getVariableName()) : that.getVariableName() == null;
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return super.hashCode();
 	}
 
 	/**

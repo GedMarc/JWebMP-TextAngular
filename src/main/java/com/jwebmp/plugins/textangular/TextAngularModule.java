@@ -31,7 +31,6 @@ public class TextAngularModule
 		implements IAngularModule<TextAngularModule>
 {
 
-	private static final long serialVersionUID = 1L;
 
 	/*
 	 * Constructs a new TextAngularModule
