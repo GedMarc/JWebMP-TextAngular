@@ -17,6 +17,7 @@ module com.jwebmp.plugins.textangular {
 	requires java.validation;
 	requires java.logging;
 	requires com.jwebmp.guicedinjection;
+	requires com.jwebmp.core.angularjs;
 
 	provides IPageConfigurator with TextAngularPageConfigurator;
 	provides IAngularModule with TextAngularModule;
