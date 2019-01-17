@@ -5,7 +5,7 @@ import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import org.junit.jupiter.api.Test;
 
 /**
- * @author Marc Magon
+ * @author GedMarc
  */
 public class TextAngularPageConfiguratorTest
 

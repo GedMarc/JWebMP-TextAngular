@@ -6,7 +6,7 @@ import com.jwebmp.core.plugins.ComponentInformation;
 /**
  * Angular UI Sortable Helper
  *
- * @author Marc Magon
+ * @author GedMarc
  * @since 09 Jun 2017
  */
 @ComponentInformation(name = "Text Angular",
