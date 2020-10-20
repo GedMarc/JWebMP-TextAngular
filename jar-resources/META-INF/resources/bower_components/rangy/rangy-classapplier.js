@@ -12,19 +12,19 @@
  * Version: 1.3.0
  * Build date: 10 May 2015
  */
-(function (factory, root) {
+(function(factory, root) {
     if (typeof define == "function" && define.amd) {
         // AMD. Register as an anonymous module with a dependency on Rangy.
         define(["./rangy-core"], factory);
     } else if (typeof module != "undefined" && typeof exports == "object") {
         // Node/CommonJS style
-        module.exports = factory(require("rangy"));
+        module.exports = factory( require("rangy") );
     } else {
         // No AMD or CommonJS support so we use the rangy property of root (probably the global variable)
         factory(root.rangy);
     }
-})(function (rangy) {
-    rangy.createModule("ClassApplier", ["WrappedSelection"], function (api, module) {
+})(function(rangy) {
+    rangy.createModule("ClassApplier", ["WrappedSelection"], function(api, module) {
         var dom = api.dom;
         var DomPosition = dom.DomPosition;
         var contains = dom.arrayContains;
@@ -86,12 +86,12 @@
             }
         }
 
-        var removeClass = (function () {
+        var removeClass = (function() {
             function replacer(matched, whiteSpaceBefore, whiteSpaceAfter) {
                 return (whiteSpaceBefore && whiteSpaceAfter) ? " " : "";
             }
 
-            return function (el, className) {
+            return function(el, className) {
                 if (typeof el.classList == "object") {
                     el.classList.remove(className);
                 } else {
@@ -117,7 +117,7 @@
         }
 
         function getSortedClassName(el) {
-            return sortClassName(getClass(el));
+            return sortClassName( getClass(el) );
         }
 
         function haveSameClasses(el1, el2) {
@@ -147,7 +147,7 @@
                 ++newOffset;
             }
 
-            if (posNode == oldParent && (posOffset == oldIndex || posOffset == oldIndex + 1)) {
+            if (posNode == oldParent && (posOffset == oldIndex  || posOffset == oldIndex + 1)) {
                 newNode = newParent;
                 newOffset += newIndex - oldIndex;
             }
@@ -175,7 +175,7 @@
             var oldParent = node.parentNode;
             var oldIndex = dom.getNodeIndex(node);
 
-            forEach(positionsToPreserve, function (position) {
+            forEach(positionsToPreserve, function(position) {
                 movePosition(position, oldParent, oldIndex, newParent, newIndex);
             });
 
@@ -192,7 +192,7 @@
             var oldParent = node.parentNode;
             var oldIndex = dom.getNodeIndex(node);
 
-            forEach(positionsToPreserve, function (position) {
+            forEach(positionsToPreserve, function(position) {
                 movePositionWhenRemovingNode(position, oldParent, oldIndex);
             });
 
@@ -201,7 +201,7 @@
 
         function moveChildrenPreservingPositions(node, newParent, newIndex, removeNode, positionsToPreserve) {
             var child, children = [];
-            while ((child = node.firstChild)) {
+            while ( (child = node.firstChild) ) {
                 movePreservingPositions(child, newParent, newIndex++, positionsToPreserve);
                 children.push(child);
             }
@@ -232,13 +232,13 @@
 
             // Remove non-intersecting text nodes from the start of the range
             var start = 0, node;
-            while ((node = nodes[start]) && !rangeSelectsAnyText(range, node)) {
+            while ( (node = nodes[start]) && !rangeSelectsAnyText(range, node) ) {
                 ++start;
             }
 
             // Remove non-intersecting text nodes from the start of the range
             var end = nodes.length - 1;
-            while ((node = nodes[end]) && !rangeSelectsAnyText(range, node)) {
+            while ( (node = nodes[end]) && !rangeSelectsAnyText(range, node) ) {
                 --end;
             }
 
@@ -252,7 +252,7 @@
                 name = attr1.name;
                 if (name != "class") {
                     attr2 = el2.attributes.getNamedItem(name);
-                    if ((attr1 === null) != (attr2 === null)) return false;
+                    if ( (attr1 === null) != (attr2 === null) ) return false;
                     if (attr1.specified != attr2.specified) return false;
                     if (attr1.specified && attr1.nodeValue !== attr2.nodeValue) return false;
                 }
@@ -263,7 +263,7 @@
         function elementHasNonClassAttributes(el, exceptions) {
             for (var i = 0, len = el.attributes.length, attrName; i < len; ++i) {
                 attrName = el.attributes[i].name;
-                if (!(exceptions && contains(exceptions, attrName)) && el.attributes[i].specified && attrName != "class") {
+                if ( !(exceptions && contains(exceptions, attrName)) && el.attributes[i].specified && attrName != "class") {
                     return true;
                 }
             }
@@ -271,7 +271,7 @@
         }
 
         var getComputedStyleProperty = dom.getComputedStyleProperty;
-        var isEditableElement = (function () {
+        var isEditableElement = (function() {
             var testEl = document.createElement("div");
             return typeof testEl.isContentEditable == "boolean" ?
                 function (node) {
@@ -289,7 +289,7 @@
             var parent;
             return node && node.nodeType == 1 &&
                 (( (parent = node.parentNode) && parent.nodeType == 9 && parent.designMode == "on") ||
-                    (isEditableElement(node) && !isEditableElement(node.parentNode)));
+                (isEditableElement(node) && !isEditableElement(node.parentNode)));
         }
 
         function isEditable(node) {
@@ -331,7 +331,7 @@
 
         function getRangeBoundaries(ranges) {
             var positions = [], i, range;
-            for (i = 0; range = ranges[i++];) {
+            for (i = 0; range = ranges[i++]; ) {
                 positions.push(
                     new DomPosition(range.startContainer, range.startOffset),
                     new DomPosition(range.endContainer, range.endOffset)
@@ -393,7 +393,7 @@
                 }
                 var child, newChildIndex = 0;
 
-                while ((child = descendantNode.childNodes[descendantOffset])) {
+                while ( (child = descendantNode.childNodes[descendantOffset]) ) {
                     movePreservingPositions(child, newNode, newChildIndex++, positionsToPreserve);
                 }
                 movePreservingPositions(newNode, parentNode, dom.getNodeIndex(descendantNode) + 1, positionsToPreserve);
@@ -424,7 +424,7 @@
         function createAdjacentMergeableTextNodeGetter(forward) {
             var siblingPropName = forward ? "nextSibling" : "previousSibling";
 
-            return function (textNode, checkParentElement) {
+            return function(textNode, checkParentElement) {
                 var el = textNode.parentNode;
                 var adjacentNode = textNode[siblingPropName];
                 if (adjacentNode) {
@@ -449,7 +449,7 @@
         var getPreviousMergeableTextNode = createAdjacentMergeableTextNodeGetter(false),
             getNextMergeableTextNode = createAdjacentMergeableTextNodeGetter(true);
 
-
+    
         function Merge(firstNode) {
             this.isElementMerge = (firstNode.nodeType == 1);
             this.textNodes = [];
@@ -460,13 +460,13 @@
         }
 
         Merge.prototype = {
-            doMerge: function (positionsToPreserve) {
+            doMerge: function(positionsToPreserve) {
                 var textNodes = this.textNodes;
                 var firstTextNode = textNodes[0];
                 if (textNodes.length > 1) {
                     var firstTextNodeIndex = dom.getNodeIndex(firstTextNode);
                     var textParts = [], combinedTextLength = 0, textNode, parent;
-                    forEach(textNodes, function (textNode, i) {
+                    forEach(textNodes, function(textNode, i) {
                         parent = textNode.parentNode;
                         if (i > 0) {
                             parent.removeChild(textNode);
@@ -474,7 +474,7 @@
                                 dom.removeNode(parent);
                             }
                             if (positionsToPreserve) {
-                                forEach(positionsToPreserve, function (position) {
+                                forEach(positionsToPreserve, function(position) {
                                     // Handle case where position is inside the text node being merged into a preceding node
                                     if (position.node == textNode) {
                                         position.node = firstTextNode;
@@ -499,7 +499,7 @@
                 return firstTextNode.data;
             },
 
-            getLength: function () {
+            getLength: function() {
                 var i = this.textNodes.length, len = 0;
                 while (i--) {
                     len += this.textNodes[i].length;
@@ -507,9 +507,9 @@
                 return len;
             },
 
-            toString: function () {
+            toString: function() {
                 var textParts = [];
-                forEach(this.textNodes, function (textNode, i) {
+                forEach(this.textNodes, function(textNode, i) {
                     textParts[i] = "'" + textNode.data + "'";
                 });
                 return "[Merge(" + textParts.join(",") + ")]";
@@ -537,7 +537,7 @@
                 elementPropertiesFromOptions = options.elementProperties;
                 elementAttributes = options.elementAttributes;
 
-                for (i = 0; propName = optionProperties[i++];) {
+                for (i = 0; propName = optionProperties[i++]; ) {
                     if (options.hasOwnProperty(propName)) {
                         applier[propName] = options[propName];
                     }
@@ -554,7 +554,7 @@
             applier.attrExceptions = [];
             var el = document.createElement(applier.elementTagName);
             applier.elementProperties = applier.copyPropertiesToElement(elementPropertiesFromOptions, el, true);
-            each(elementAttributes, function (attrName, attrValue) {
+            each(elementAttributes, function(attrName, attrValue) {
                 applier.attrExceptions.push(attrName);
                 // Ensure each attribute value is a string
                 elementAttributes[attrName] = "" + attrValue;
@@ -597,7 +597,7 @@
             removeEmptyElements: true,
             onElementCreate: null,
 
-            copyPropertiesToElement: function (props, el, createCopy) {
+            copyPropertiesToElement: function(props, el, createCopy) {
                 var s, elStyle, elProps = {}, elPropsStyle, propValue, elPropValue, attrName;
 
                 for (var p in props) {
@@ -651,7 +651,7 @@
                 return createCopy ? elProps : "";
             },
 
-            copyAttributesToElement: function (attrs, el) {
+            copyAttributesToElement: function(attrs, el) {
                 for (var attrName in attrs) {
                     if (attrs.hasOwnProperty(attrName) && !/^class(?:Name)?$/i.test(attrName)) {
                         el.setAttribute(attrName, attrs[attrName]);
@@ -659,24 +659,24 @@
                 }
             },
 
-            appliesToElement: function (el) {
+            appliesToElement: function(el) {
                 return contains(this.tagNames, el.tagName.toLowerCase());
             },
 
-            getEmptyElements: function (range) {
+            getEmptyElements: function(range) {
                 var applier = this;
-                return range.getNodes([1], function (el) {
+                return range.getNodes([1], function(el) {
                     return applier.appliesToElement(el) && !el.hasChildNodes();
                 });
             },
 
-            hasClass: function (node) {
+            hasClass: function(node) {
                 return node.nodeType == 1 &&
                     (this.applyToAnyTagName || this.appliesToElement(node)) &&
                     hasClass(node, this.className);
             },
 
-            getSelfOrAncestorWithClass: function (node) {
+            getSelfOrAncestorWithClass: function(node) {
                 while (node) {
                     if (this.hasClass(node)) {
                         return node;
@@ -686,17 +686,17 @@
                 return null;
             },
 
-            isModifiable: function (node) {
+            isModifiable: function(node) {
                 return !this.applyToEditableOnly || isEditable(node);
             },
 
             // White space adjacent to an unwrappable node can be ignored for wrapping
-            isIgnorableWhiteSpaceNode: function (node) {
+            isIgnorableWhiteSpaceNode: function(node) {
                 return this.ignoreWhiteSpace && node && node.nodeType == 3 && isUnrenderedWhiteSpaceNode(node);
             },
 
             // Normalizes nodes after applying a class to a Range.
-            postApply: function (textNodes, range, positionsToPreserve, isUndo) {
+            postApply: function(textNodes, range, positionsToPreserve, isUndo) {
                 var firstNode = textNodes[0], lastNode = textNodes[textNodes.length - 1];
 
                 var merges = [], currentMerge;
@@ -707,7 +707,7 @@
                 var textNode, precedingTextNode;
 
                 // Check for every required merge and create a Merge object for each
-                forEach(textNodes, function (textNode) {
+                forEach(textNodes, function(textNode) {
                     precedingTextNode = getPreviousMergeableTextNode(textNode, !isUndo);
                     if (precedingTextNode) {
                         if (!currentMerge) {
@@ -750,7 +750,7 @@
                 }
             },
 
-            createContainer: function (parentNode) {
+            createContainer: function(parentNode) {
                 var doc = dom.getDocument(parentNode);
                 var namespace;
                 var el = createElementNSSupported && !dom.isHtmlNamespace(parentNode) && (namespace = parentNode.namespaceURI) ?
@@ -766,9 +766,9 @@
                 return el;
             },
 
-            elementHasProperties: function (el, props) {
+            elementHasProperties: function(el, props) {
                 var applier = this;
-                return each(props, function (p, propValue) {
+                return each(props, function(p, propValue) {
                     if (p == "className") {
                         // For checking whether we should reuse an existing element, we just want to check that the element
                         // has all the classes specified in the className property. When deciding whether the element is
@@ -785,15 +785,15 @@
                 });
             },
 
-            elementHasAttributes: function (el, attrs) {
-                return each(attrs, function (name, value) {
+            elementHasAttributes: function(el, attrs) {
+                return each(attrs, function(name, value) {
                     if (el.getAttribute(name) !== value) {
                         return false;
                     }
                 });
             },
 
-            applyToTextNode: function (textNode, positionsToPreserve) {
+            applyToTextNode: function(textNode, positionsToPreserve) {
 
                 // Check whether the text node can be styled. Text within a <style> or <script> element, for example,
                 // should not be styled. See issue 283.
@@ -816,7 +816,7 @@
 
             },
 
-            isRemovable: function (el) {
+            isRemovable: function(el) {
                 return el.tagName.toLowerCase() == this.elementTagName &&
                     getSortedClassName(el) == this.elementSortedClassName &&
                     this.elementHasProperties(el, this.elementProperties) &&
@@ -825,23 +825,23 @@
                     this.isModifiable(el);
             },
 
-            isEmptyContainer: function (el) {
+            isEmptyContainer: function(el) {
                 var childNodeCount = el.childNodes.length;
                 return el.nodeType == 1 &&
                     this.isRemovable(el) &&
                     (childNodeCount == 0 || (childNodeCount == 1 && this.isEmptyContainer(el.firstChild)));
             },
 
-            removeEmptyContainers: function (range) {
+            removeEmptyContainers: function(range) {
                 var applier = this;
-                var nodesToRemove = range.getNodes([1], function (el) {
+                var nodesToRemove = range.getNodes([1], function(el) {
                     return applier.isEmptyContainer(el);
                 });
 
                 var rangesToPreserve = [range];
                 var positionsToPreserve = getRangeBoundaries(rangesToPreserve);
 
-                forEach(nodesToRemove, function (node) {
+                forEach(nodesToRemove, function(node) {
                     removePreservingPositions(node, positionsToPreserve);
                 });
 
@@ -849,7 +849,7 @@
                 updateRangesFromBoundaries(rangesToPreserve, positionsToPreserve);
             },
 
-            undoToTextNode: function (textNode, range, ancestorWithClass, positionsToPreserve) {
+            undoToTextNode: function(textNode, range, ancestorWithClass, positionsToPreserve) {
                 if (!range.containsNode(ancestorWithClass)) {
                     // Split out the portion of the ancestor from which we can remove the class
                     //var parent = ancestorWithClass.parentNode, index = dom.getNodeIndex(ancestorWithClass);
@@ -871,14 +871,14 @@
                 }
             },
 
-            splitAncestorWithClass: function (container, offset, positionsToPreserve) {
+            splitAncestorWithClass: function(container, offset, positionsToPreserve) {
                 var ancestorWithClass = this.getSelfOrAncestorWithClass(container);
                 if (ancestorWithClass) {
                     splitNodeAt(ancestorWithClass, container, offset, positionsToPreserve);
                 }
             },
 
-            undoToAncestor: function (ancestorWithClass, positionsToPreserve) {
+            undoToAncestor: function(ancestorWithClass, positionsToPreserve) {
                 if (this.isRemovable(ancestorWithClass)) {
                     replaceWithOwnChildrenPreservingPositions(ancestorWithClass, positionsToPreserve);
                 } else {
@@ -886,7 +886,7 @@
                 }
             },
 
-            applyToRange: function (range, rangesToPreserve) {
+            applyToRange: function(range, rangesToPreserve) {
                 var applier = this;
                 rangesToPreserve = rangesToPreserve || [];
 
@@ -903,9 +903,9 @@
                 var textNodes = getEffectiveTextNodes(range);
 
                 if (textNodes.length) {
-                    forEach(textNodes, function (textNode) {
+                    forEach(textNodes, function(textNode) {
                         if (!applier.isIgnorableWhiteSpaceNode(textNode) && !applier.getSelfOrAncestorWithClass(textNode) &&
-                            applier.isModifiable(textNode)) {
+                                applier.isModifiable(textNode)) {
                             applier.applyToTextNode(textNode, positionsToPreserve);
                         }
                     });
@@ -922,12 +922,12 @@
                 // Apply classes to any appropriate empty elements
                 var emptyElements = applier.getEmptyElements(range);
 
-                forEach(emptyElements, function (el) {
+                forEach(emptyElements, function(el) {
                     addClass(el, applier.className);
                 });
             },
 
-            applyToRanges: function (ranges) {
+            applyToRanges: function(ranges) {
 
                 var i = ranges.length;
                 while (i--) {
@@ -938,12 +938,12 @@
                 return ranges;
             },
 
-            applyToSelection: function (win) {
+            applyToSelection: function(win) {
                 var sel = api.getSelection(win);
-                sel.setRanges(this.applyToRanges(sel.getAllRanges()));
+                sel.setRanges( this.applyToRanges(sel.getAllRanges()) );
             },
 
-            undoToRange: function (range, rangesToPreserve) {
+            undoToRange: function(range, rangesToPreserve) {
                 var applier = this;
                 // Create an array of range boundaries to preserve
                 rangesToPreserve = rangesToPreserve || [];
@@ -986,12 +986,12 @@
                 // Remove class from any appropriate empty elements
                 var emptyElements = applier.getEmptyElements(range);
 
-                forEach(emptyElements, function (el) {
+                forEach(emptyElements, function(el) {
                     removeClass(el, applier.className);
                 });
             },
 
-            undoToRanges: function (ranges) {
+            undoToRanges: function(ranges) {
                 // Get ranges returned in document order
                 var i = ranges.length;
 
@@ -1002,30 +1002,30 @@
                 return ranges;
             },
 
-            undoToSelection: function (win) {
+            undoToSelection: function(win) {
                 var sel = api.getSelection(win);
                 var ranges = api.getSelection(win).getAllRanges();
                 this.undoToRanges(ranges);
                 sel.setRanges(ranges);
             },
 
-            isAppliedToRange: function (range) {
+            isAppliedToRange: function(range) {
                 if (range.collapsed || range.toString() == "") {
                     return !!this.getSelfOrAncestorWithClass(range.commonAncestorContainer);
                 } else {
-                    var textNodes = range.getNodes([3]);
+                    var textNodes = range.getNodes( [3] );
                     if (textNodes.length)
-                        for (var i = 0, textNode; textNode = textNodes[i++];) {
-                            if (!this.isIgnorableWhiteSpaceNode(textNode) && rangeSelectsAnyText(range, textNode) &&
+                    for (var i = 0, textNode; textNode = textNodes[i++]; ) {
+                        if (!this.isIgnorableWhiteSpaceNode(textNode) && rangeSelectsAnyText(range, textNode) &&
                                 this.isModifiable(textNode) && !this.getSelfOrAncestorWithClass(textNode)) {
-                                return false;
-                            }
+                            return false;
                         }
+                    }
                     return true;
                 }
             },
 
-            isAppliedToRanges: function (ranges) {
+            isAppliedToRanges: function(ranges) {
                 var i = ranges.length;
                 if (i == 0) {
                     return false;
@@ -1038,12 +1038,12 @@
                 return true;
             },
 
-            isAppliedToSelection: function (win) {
+            isAppliedToSelection: function(win) {
                 var sel = api.getSelection(win);
                 return this.isAppliedToRanges(sel.getAllRanges());
             },
 
-            toggleRange: function (range) {
+            toggleRange: function(range) {
                 if (this.isAppliedToRange(range)) {
                     this.undoToRange(range);
                 } else {
@@ -1051,7 +1051,7 @@
                 }
             },
 
-            toggleSelection: function (win) {
+            toggleSelection: function(win) {
                 if (this.isAppliedToSelection(win)) {
                     this.undoToSelection(win);
                 } else {
@@ -1059,10 +1059,10 @@
                 }
             },
 
-            getElementsWithClassIntersectingRange: function (range) {
+            getElementsWithClassIntersectingRange: function(range) {
                 var elements = [];
                 var applier = this;
-                range.getNodes([3], function (textNode) {
+                range.getNodes([3], function(textNode) {
                     var el = applier.getSelfOrAncestorWithClass(textNode);
                     if (el && !contains(elements, el)) {
                         elements.push(el);
@@ -1071,8 +1071,7 @@
                 return elements;
             },
 
-            detach: function () {
-            }
+            detach: function() {}
         };
 
         function createClassApplier(className, options, tagNames) {
@@ -1099,6 +1098,6 @@
         api.createClassApplier = createClassApplier;
         util.createAliasForDeprecatedMethod(api, "createCssClassApplier", "createClassApplier", module);
     });
-
+    
     return rangy;
 }, this);
