@@ -20,6 +20,7 @@ package com.jwebmp.plugins.textangular;
 import com.jwebmp.core.Page;
 import com.jwebmp.core.base.angular.AngularPageConfigurator;
 import com.jwebmp.core.plugins.PluginInformation;
+import com.jwebmp.core.plugins.PluginStatus;
 import com.jwebmp.core.plugins.jquery.JQueryPageConfigurator;
 import com.jwebmp.core.services.IPageConfigurator;
 
@@ -43,7 +44,12 @@ import jakarta.validation.constraints.NotNull;
 		pluginIconUrl = "",
 		pluginIconImageUrl = "",
 		pluginOriginalHomepage = "http://textangular.com/",
-		pluginDownloadUrl = "https://sourceforge.net/projects/jwebswing/files/plugins/TextAngular.jar/download")
+		pluginDownloadUrl = "https://mvnrepository.com/artifact/com.jwebmp.plugins.angular/jwebmp-text-angular",
+		pluginGroupId = "com.jwebmp.plugins.angular",
+		pluginArtifactId = "jwebmp-text-angular",
+		pluginModuleName = "com.jwebmp.plugins.textangular",
+		pluginStatus = PluginStatus.Released
+)
 public class TextAngularPageConfigurator
 		implements IPageConfigurator<TextAngularPageConfigurator>
 {

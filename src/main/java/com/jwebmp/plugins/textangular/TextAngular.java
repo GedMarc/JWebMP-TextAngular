@@ -1,6 +1,7 @@
 package com.jwebmp.plugins.textangular;
 
 import com.jwebmp.core.base.html.Div;
+import com.jwebmp.core.base.html.DivSimple;
 import com.jwebmp.core.plugins.ComponentInformation;
 
 /**
@@ -13,7 +14,7 @@ import com.jwebmp.core.plugins.ComponentInformation;
 		description = "A radically powerful Text-Editor/Wysiwyg editor for Angular.js! Create multiple editor instances, two-way-bind HTML content, watch editors for changes and more!",
 		url = "https://github.com/textAngular/textAngular")
 public class TextAngular
-		extends Div
+		extends DivSimple<TextAngular>
 {
 
 

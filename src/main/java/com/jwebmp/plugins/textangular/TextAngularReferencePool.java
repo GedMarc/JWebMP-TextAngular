@@ -31,11 +31,11 @@ import com.jwebmp.core.base.servlets.interfaces.ReferencePool;
 enum TextAngularReferencePool
 		implements ReferencePool
 {
-	TextAngular(new JavascriptReference("TextAngular", 1.5, "bower_components/textAngular/dist/textAngular.min.js", 16),
-	            new CSSReference("TextAngular", 1.5, "bower_components/textAngular/dist/textAngular.css")),
-	TextAngularSetup(new JavascriptReference("TextAngularSetup", 1.5, "bower_components/textAngular/dist/textAngularSetup", 15), null),
-	TextAngularSanitize(new JavascriptReference("TextAngularSanitize", 1.5, "bower_components/textAngular/dist/textAngular-sanitize.js", 15), null),
-	TextAngularRangy(new JavascriptReference("TextAngularRangy", 1.5, "bower_components/textAngular/dist/textAngular-rangy.min.js", 15), null);
+	TextAngular(new JavascriptReference("TextAngular", 1.516, "bower_components/textAngular/dist/textAngular.min.js", 16),
+	            new CSSReference("TextAngular", 1.516, "bower_components/textAngular/dist/textAngular.css")),
+	TextAngularSetup(new JavascriptReference("TextAngularSetup", 1.516, "bower_components/textAngular/dist/textAngularSetup", 15), null),
+	TextAngularSanitize(new JavascriptReference("TextAngularSanitize", 1.516, "bower_components/textAngular/dist/textAngular-sanitize.js", 15), null),
+	TextAngularRangy(new JavascriptReference("TextAngularRangy", 1.516, "bower_components/textAngular/dist/textAngular-rangy.min.js", 15), null);
 	/**
 	 * Any sub data
 	 */
