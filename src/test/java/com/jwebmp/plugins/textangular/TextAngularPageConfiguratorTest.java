@@ -19,7 +19,7 @@ public class TextAngularPageConfiguratorTest
 	public void testSomeMethod()
 	{
 		AngularPageConfigurator.setRequired(true);
-		Page p = new Page();
+		Page<?> p = new Page();
 		System.out.println(p.toString(0));
 	}
 
