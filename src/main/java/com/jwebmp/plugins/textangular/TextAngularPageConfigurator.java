@@ -34,7 +34,7 @@ import jakarta.validation.constraints.NotNull;
  */
 @PluginInformation(pluginName = "TextAngular",
 		pluginDescription = "A radically powerful Text-Editor/Wysiwyg editor for Angular.js! Create multiple editor instances, two-way-bind HTML content, watch editors for changes and more!",
-		pluginUniqueName = "jwebswing-angular-ui-bootstrap",
+		pluginUniqueName = "angular-ui-bootstrap",
 		pluginVersion = "1.5.16",
 		pluginCategories = "text,html entry, edit box,bootstrap, ui,web ui, framework",
 		pluginSubtitle = "textAngular is a super cool WYSIWYG Text Editor directive for AngularJS",
