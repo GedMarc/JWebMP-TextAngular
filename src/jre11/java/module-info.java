@@ -10,7 +10,7 @@ module com.jwebmp.plugins.textangular {
 	requires jakarta.validation;
 	requires java.logging;
 	requires com.guicedee.guicedinjection;
-	requires com.jwebmp.core.angularjs;
+	requires com.jwebmp.core.angular;
 
 	provides com.jwebmp.core.services.IPageConfigurator with com.jwebmp.plugins.textangular.TextAngularPageConfigurator;
 	provides com.jwebmp.core.base.angular.services.IAngularModule with com.jwebmp.plugins.textangular.TextAngularModule;

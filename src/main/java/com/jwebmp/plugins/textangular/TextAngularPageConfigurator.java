@@ -97,8 +97,8 @@ public class TextAngularPageConfigurator
 	{
 		if (!page.isConfigured() && enabled())
 		{
-			JQueryPageConfigurator.setRequired(true);
-			AngularPageConfigurator.setRequired(true);
+			
+			
 
 			page.getBody()
 			    .addJavaScriptReference(TextAngularReferencePool.TextAngular.getJavaScriptReference());
